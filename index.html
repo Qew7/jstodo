@@ -3,14 +3,23 @@
     <head>
   		<meta charset="utf-8">
         <title>Testing js</title>
+        <style>
+    	* { padding: 0; margin: 0; }
+    	table > td > button { float: right; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    	table { width: 80%; }    	
+    	p > b { width: 70%; }
+    	</style>
     </head>
     <body>
+    	<canvas id="myCanvas" width="480" height="320"></canvas>
         <button id="calc">Калькулятор</button>
         <div id='placeForText'></div>
 
         <input id="task"><button id="add">Добавить в список</button>
 		<div id="todos"></div>
 
-		<script src="/js/script.js"></script>
+
+		<script src="../jstest/js/script.js"></script>
 	</body>
 </html>
