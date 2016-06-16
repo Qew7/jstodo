@@ -4,22 +4,24 @@
   		<meta charset="utf-8">
         <title>Testing js</title>
         <style>
-    	* { padding: 0; margin: 0; }
-    	table > td > button { float: right; }
+        table { border-spacing: 0 }
     	canvas { background: #eee; display: block; margin: 0 auto; }
     	table { width: 80%; }    	
     	p > b { width: 70%; }
+    	/*table td > button { float: right; }*/
+    	table td:last-child {text-align: right;}
+    	/*table td:first-child { width: 78% }*/
+    	tr:nth-child(2n) { background: #f0f0f0;} 
+    	#task { height:30px; width: 500px; }
+    	#add { height: 33.5px; margin: 30px; }
     	</style>
     </head>
     <body>
-    	<canvas id="myCanvas" width="480" height="320"></canvas>
-        <button id="calc">Калькулятор</button>
-        <div id='placeForText'></div>
 
-        <input id="task"><button id="add">Добавить в список</button>
+        <div align="center"><input id="task"><button id="add">Добавить в список</button></div>
 		<div id="todos"></div>
 
 
-		<script src="/js/script.js"></script>
+		<script src="../jstest/js/script.js"></script>
 	</body>
 </html>
