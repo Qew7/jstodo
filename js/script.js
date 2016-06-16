@@ -1,5 +1,5 @@
 function get_todos() {
-    var todos = new Array;
+    var todos = [];
     var todos_str = localStorage.getItem('todo');
     if (todos_str !== null) {
         todos = JSON.parse(todos_str); 
@@ -14,7 +14,7 @@ function add() {
     } 
     var task = document.getElementById('task').value;
     var todos = get_todos();
-    todos.push(task);
+    todos.push({text: task, striked: false})
     console.log(todos);
     localStorage.setItem('todo', JSON.stringify(todos));
     document.getElementById('task').value = '';
@@ -38,8 +38,8 @@ function remove() {
 function edit() {
     var id = this.getAttribute('id');
     var todos = get_todos();
-    newtodo = prompt('Изменение элемента', todos[id])
-    todos.splice(id, 1, newtodo);
+    newtodo = prompt('Изменение элемента', todos[id]['text'])
+    todos[id]['text'] = newtodo;
     localStorage.setItem('todo', JSON.stringify(todos));
  
     show();
@@ -47,17 +47,14 @@ function edit() {
     return false;
 }
 
-function cross() {
+function cross1() {
 	var id = this.getAttribute('id');
     var todos = get_todos();
-    // if (todos.splice(0, 6) == '<strike>' && todos.splice(-1, 7) == '</strike>') {
-    // 	console.log()
-    // 	return
-    // }
-    newtodo = '<strike>' + todos[id] + '</strike>'
+    newtodo = todos[id];
+    newtodo['striked'] = true;
     todos.splice(id, 1, newtodo);
+    console.log(todos);
     localStorage.setItem('todo', JSON.stringify(todos));
-    document.getElementById(id).innerHTML = 'Расчеркнуть';
  
     show();
  
@@ -65,17 +62,34 @@ function cross() {
 }
 
 function uncross() {
+	var id = this.getAttribute('id');
+    var todos = get_todos();
+    newtodo = todos[id];
+    newtodo['striked'] = false;
+    todos.splice(id, 1, newtodo);
+    localStorage.setItem('todo', JSON.stringify(todos));
+
+    show();
+ 
+    return false;
 }
  
 function show() {
     var todos = get_todos();
+    console.log(todos);
  	
  	var html = '<table align="center">';
+ 	var striked = '';
+ 	var crossed = '';
+ 	var cross = '';
     for(var i=0; i<todos.length; i++) {	
-        html += '<tr><td><p><b>[' + ((+i) +1) + ']&nbsp;</b>' +  todos[i] + '</p></td><td>' 
+    	striked = todos[i]['striked'] ? 'striked' : '';
+    	crossed = todos[i]['striked'] ? 'Расчеркнуть' : 'Зачеркнуть';
+    	cross = todos[i]['striked'] ? 'uncross' : 'cross1';
+        html += '<tr id="' + i + '"><td class="'+ striked +'"><p><b>[' + ((+i) +1) + ']&nbsp;</b>' +  todos[i]['text'] + '</p></td><td>' 
         + '<button class="remove" id="' + i  + '">Удалить из списка</button><br />' 
         + '<button class="edit" id="' + i  + '">Редактировать</button><br />' 
-        + '<button class="cross" id="' + i  + '">Зачеркнуть</button>'+'</td></tr>';
+        + '<button class="'+cross+'" id="' + i  + '">'+crossed+'</button>'+'</td></tr>';
     };
     html += '</table>';
  
@@ -89,9 +103,9 @@ function show() {
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', edit);
     };
-    var buttons = document.getElementsByClassName('cross');
+    var buttons = document.getElementsByClassName('cross1');
     for (var i=0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', cross);
+        buttons[i].addEventListener('click', cross1);
     };
     var buttons = document.getElementsByClassName('uncross');
     for (var i=0; i < buttons.length; i++) {
