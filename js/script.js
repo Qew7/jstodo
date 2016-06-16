@@ -7,7 +7,7 @@ function init (){
 			case'+':
 			result= +(first)+ +(second)
 			break
-		case'-':
+			case'-':
 				result = first - second
 				break
 			case'*':
@@ -60,15 +60,37 @@ function remove() {
  
     return false;
 }
+
+function edit() {
+    var id = this.getAttribute('id');
+    var todos = get_todos();
+    newtodo = prompt('Изменение элемента', todos[id])
+    todos.splice(id, 1, newtodo);
+    localStorage.setItem('todo', JSON.stringify(todos));
+ 
+    show();
+ 
+    return false;
+}
+
+function cross() {
+	console.log(1234)
+}
+
+function uncross() {
+}
  
 function show() {
     var todos = get_todos();
- 
-    var html = '<ul>';
-    for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">Убрать из списка</button></li>';
+ 	
+ 	var html = '<table>';
+    for(var i=0; i<todos.length; i++) {	
+        html += '<tr><td><p><b>[' + ((+i) +1) + ']&nbsp;</b>' +  todos[i] + '</p></td><td>' 
+        + '<button class="remove" id="' + i  + '">Убрать из списка</button>' 
+        + '<button class="edit" id="' + i  + '">Редактировать</button>' 
+        + '<button class="cross" id="' + i  + '">Зачеркнуть</button>'+'</td></tr>';
     };
-    html += '</ul>';
+    html += '</table>';
  
     document.getElementById('todos').innerHTML = html;
  
@@ -76,8 +98,37 @@ function show() {
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
+    var buttons = document.getElementsByClassName('edit');
+    for (var i=0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', edit);
+    };
+    var buttons = document.getElementsByClassName('cross');
+    for (var i=0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', cross);
+    };
+    var buttons = document.getElementsByClassName('uncross');
+    for (var i=0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', uncross);
+    };
 }
+
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+ctx.beginPath();
+ctx.rect(20, 40, 50, 50);
+ctx.fillStyle = "red";
+ctx.fill();
+ctx.closePath();
+
+ctx.beginPath();
+ctx.arc(240, 160, 20, 0, Math.PI*2, false);
+ctx.fillStyle = "green";
+ctx.fill();
+ctx.closePath();
+
 document.getElementById('add').addEventListener('click',add);
 document.getElementById('calc').addEventListener('click',init);
+
 show();
 
