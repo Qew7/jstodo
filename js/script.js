@@ -1,31 +1,3 @@
-
-function init (){
-	op=prompt('Операция')
-	first=prompt('Первоечисло')
-	second=prompt('Второечисло')
-	switch(op){
-			case'+':
-			result= +(first)+ +(second)
-			break
-			case'-':
-				result = first - second
-				break
-			case'*':
-				result = first * second
-				break
-			case'/':
-				result = first / second
-				break	
-			case'\\':
-				result = first / second
-				break
-			default:
-				result = 'Операция неопределена'
-				break
-	}
-	document.getElementById('placeForText').innerHTML=first + op + second + '=' + result
-}
-
 function get_todos() {
     var todos = new Array;
     var todos_str = localStorage.getItem('todo');
@@ -43,7 +15,9 @@ function add() {
     var task = document.getElementById('task').value;
     var todos = get_todos();
     todos.push(task);
+    console.log(todos);
     localStorage.setItem('todo', JSON.stringify(todos));
+    document.getElementById('task').value = '';
  
     show();
  
@@ -74,7 +48,20 @@ function edit() {
 }
 
 function cross() {
-	console.log(1234)
+	var id = this.getAttribute('id');
+    var todos = get_todos();
+    // if (todos.splice(0, 6) == '<strike>' && todos.splice(-1, 7) == '</strike>') {
+    // 	console.log()
+    // 	return
+    // }
+    newtodo = '<strike>' + todos[id] + '</strike>'
+    todos.splice(id, 1, newtodo);
+    localStorage.setItem('todo', JSON.stringify(todos));
+    document.getElementById(id).innerHTML = 'Расчеркнуть';
+ 
+    show();
+ 
+    return false;
 }
 
 function uncross() {
@@ -83,11 +70,11 @@ function uncross() {
 function show() {
     var todos = get_todos();
  	
- 	var html = '<table>';
+ 	var html = '<table align="center">';
     for(var i=0; i<todos.length; i++) {	
         html += '<tr><td><p><b>[' + ((+i) +1) + ']&nbsp;</b>' +  todos[i] + '</p></td><td>' 
-        + '<button class="remove" id="' + i  + '">Убрать из списка</button>' 
-        + '<button class="edit" id="' + i  + '">Редактировать</button>' 
+        + '<button class="remove" id="' + i  + '">Удалить из списка</button><br />' 
+        + '<button class="edit" id="' + i  + '">Редактировать</button><br />' 
         + '<button class="cross" id="' + i  + '">Зачеркнуть</button>'+'</td></tr>';
     };
     html += '</table>';
@@ -112,23 +99,7 @@ function show() {
     };
 }
 
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-
-ctx.beginPath();
-ctx.rect(20, 40, 50, 50);
-ctx.fillStyle = "red";
-ctx.fill();
-ctx.closePath();
-
-ctx.beginPath();
-ctx.arc(240, 160, 20, 0, Math.PI*2, false);
-ctx.fillStyle = "green";
-ctx.fill();
-ctx.closePath();
-
 document.getElementById('add').addEventListener('click',add);
-document.getElementById('calc').addEventListener('click',init);
 
 show();
 
