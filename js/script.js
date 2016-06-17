@@ -8,7 +8,7 @@ function get_todos() {
 }
  
 function add() {
-	if (document.getElementById('task').value.length === 0) {
+    if (document.getElementById('task').value.length === 0) {
     	alert('Поле пустое')
     	return
     } 
@@ -39,7 +39,7 @@ function edit() {
     var id = this.getAttribute('id');
     var todos = get_todos();
     newtodo = prompt('Изменение элемента', todos[id]['text'])
-    if (newtodo == null) {
+    if (newtodo == 'null') {
     	newtodo = todos[id];
     	alert(1);
     }
@@ -52,7 +52,7 @@ function edit() {
 }
 
 function cross1() {
-	var id = this.getAttribute('id');
+    var id = this.getAttribute('id');
     var todos = get_todos();
     newtodo = todos[id];
     newtodo['striked'] = true;
@@ -66,7 +66,7 @@ function cross1() {
 }
 
 function uncross() {
-	var id = this.getAttribute('id');
+    var id = this.getAttribute('id');
     var todos = get_todos();
     newtodo = todos[id];
     newtodo['striked'] = false;
@@ -81,11 +81,10 @@ function uncross() {
 function show() {
     var todos = get_todos();
     console.log(todos);
- 	
- 	var html = '<table align="center">';
- 	var striked = '';
- 	var crossed = '';
- 	var cross = '';
+    var html = '<table align="center">';
+    var striked = '';
+    var crossed = '';
+    var cross = '';
     for(var i=0; i<todos.length; i++) {	
     	striked = todos[i]['striked'] ? 'striked' : '';
     	crossed = todos[i]['striked'] ? 'Расчеркнуть' : 'Зачеркнуть';
