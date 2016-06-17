@@ -39,6 +39,9 @@ function edit() {
     var id = this.getAttribute('id');
     var todos = get_todos();
     newtodo = prompt('Изменение элемента', todos[id]['text'])
+    if (newtodo == null) {
+    	newtodo = todos[id];
+    }
     todos[id]['text'] = newtodo;
     localStorage.setItem('todo', JSON.stringify(todos));
  
