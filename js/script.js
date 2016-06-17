@@ -15,7 +15,6 @@ function add() {
     var task = document.getElementById('task').value;
     var todos = get_todos();
     todos.push({text: task, striked: false})
-    console.log(todos);
     localStorage.setItem('todo', JSON.stringify(todos));
     document.getElementById('task').value = '';
  
