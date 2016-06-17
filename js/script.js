@@ -38,7 +38,7 @@ function edit() {
     var id = this.getAttribute('id');
     var todos = get_todos();
     newtodo = prompt('Изменение элемента', todos[id]['text'])
-    if (newtodo == 'null') {
+    if (newtodo === null) {
     	newtodo = todos[id];
     	alert(1);
     }
@@ -118,4 +118,3 @@ function show() {
 document.getElementById('add').addEventListener('click',add);
 
 show();
-
