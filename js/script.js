@@ -40,7 +40,6 @@ function edit() {
     newtodo = prompt('Изменение элемента', todos[id]['text'])
     if (newtodo === null) {
     	newtodo = todos[id];
-    	alert(1);
     }
     todos[id]['text'] = newtodo;
     localStorage.setItem('todo', JSON.stringify(todos));
