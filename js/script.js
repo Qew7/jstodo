@@ -85,7 +85,7 @@ function show() {
     var cross = '';
     for(var i=0; i<todos.length; i++) {	
     	striked = todos[i]['striked'] ? 'striked' : '';
-    	crossed = todos[i]['striked'] ? 'Расчеркнуть' : 'Зачеркнуть';
+    	crossed = todos[i]['striked'] ? 'Восстановить' : 'Зачеркнуть';
     	cross = todos[i]['striked'] ? 'uncross' : 'cross1';
         html += '<tr id="' + i + '"><td class="'+ striked +'"><p><b>[' + ((+i) +1) + ']&nbsp;</b>' +  todos[i]['text'] + '</p></td><td>' 
         + '<button class="remove" id="' + i  + '">Удалить из списка</button><br />' 
