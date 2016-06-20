@@ -75,6 +75,23 @@ function uncross() {
  
     return false;
 }
+
+function modal() {
+    var id = this.getAttribute('id');
+    var todos = get_todos();
+    html = '<div class="modal-content"><span class="close" onclick="closeOnCross()">x</span><p>'+todos[id]['text']+'</p></div>';
+    document.getElementById('myModal').innerHTML = html;
+    document.getElementsByClassName('modal')[0].style.display = "block";
+    window.onclick = function(event) {
+        if (event.target == document.getElementsByClassName('modal')[0]) {
+            document.getElementsByClassName('modal')[0].style.display = "none";
+        };
+    }
+}
+
+function closeOnCross() {
+    document.getElementsByClassName('modal')[0].style.display = "none";
+}
  
 function show() {
     var todos = get_todos();
@@ -85,9 +102,11 @@ function show() {
     var cross = '';
     for(var i=0; i<todos.length; i++) {	
     	striked = todos[i]['striked'] ? 'striked' : '';
-    	crossed = todos[i]['striked'] ? 'Восстановить' : 'Зачеркнуть';
+    	crossed = todos[i]['striked'] ? 'Расчеркнуть' : 'Зачеркнуть';
     	cross = todos[i]['striked'] ? 'uncross' : 'cross1';
-        html += '<tr id="' + i + '"><td class="'+ striked +'"><p><b>[' + ((+i) +1) + ']&nbsp;</b>' +  todos[i]['text'] + '</p></td><td>' 
+        pointer = 'pointer';
+        html += '<tr id="' + i + '">'+'<td class="'+ striked +'">' + '<span id="' + i + '"onmouseover="this.style.cursor='
+        + pointer +'"class ="modal1";>' + '<p><b>[' + ((+i) +1) + ']&nbsp;</b>' +   todos[i]['text'] + '</p></td>'+ '</span>' + '<td>' 
         + '<button class="remove" id="' + i  + '">Удалить из списка</button><br />' 
         + '<button class="edit" id="' + i  + '">Редактировать</button><br />' 
         + '<button class="'+cross+'" id="' + i  + '">'+crossed+'</button>'+'</td></tr>';
@@ -112,8 +131,15 @@ function show() {
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', uncross);
     };
+    var buttons = document.getElementsByClassName('modal1');
+    for (var i=0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', modal);
+    };
 }
+    
+
 
 document.getElementById('add').addEventListener('click',add);
 
 show();
+
