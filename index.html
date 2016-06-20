@@ -3,25 +3,12 @@
     <head>
   		<meta charset="utf-8">
         <title>TODO List</title>
-        <style>
-        table { border-spacing: 0 }
-    	canvas { background: #eee; display: block; margin: 0 auto; }
-    	table { width: 80%; }    	
-    	p > b { width: 70%; }
-    	/*table td > button { float: right; }*/
-    	table td:last-child {text-align: right;}
-    	table td.striked { text-decoration: line-through; }
-    	/*table td:first-child { width: 78% }*/
-    	tr:nth-child(2n) { background: #f0f0f0;} 
-    	#task { height:30px; width: 500px; }
-    	#add { height: 33.5px; margin: 30px; }
-    	</style>
+        <link href="css/style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-
         <div align="center"><input id="task"><button id="add">Добавить в список</button></div>
 		<div id="todos"></div>
-
+        <div id="myModal" class="modal">
 
 		<script src="js/script.js"></script>
 	</body>
