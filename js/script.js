@@ -107,7 +107,7 @@ function show() {
     var cross = '';
     for(var i=0; i<todos.length; i++) {	
     	striked = todos[i]['striked'] ? 'striked' : '';
-    	crossed = todos[i]['striked'] ? 'Сделал' : 'Не сделал';
+    	crossed = todos[i]['striked'] ? 'Не сделал' : 'Cделал';
     	cross = todos[i]['striked'] ? 'uncross' : 'cross1';
         pointer = 'pointer';
         html += '<tr id="' + i + '">'+'<td class="'+ striked +'">' + '<span id="' + i + '"onmouseover="this.style.cursor='
