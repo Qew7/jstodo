@@ -14,7 +14,8 @@ function runScript(e) {
 function add() {
     if (document.getElementById('task').value.length === 0) {
     	alert('Поле пустое')
-    	return
+        show();
+    	return false;
     } 
     var task = document.getElementById('task').value;
     var todos = get_todos();
@@ -106,7 +107,7 @@ function show() {
     var cross = '';
     for(var i=0; i<todos.length; i++) {	
     	striked = todos[i]['striked'] ? 'striked' : '';
-    	crossed = todos[i]['striked'] ? 'Не сделал' : 'Сделал';
+    	crossed = todos[i]['striked'] ? 'Сделал' : 'Не сделал';
     	cross = todos[i]['striked'] ? 'uncross' : 'cross1';
         pointer = 'pointer';
         html += '<tr id="' + i + '">'+'<td class="'+ striked +'">' + '<span id="' + i + '"onmouseover="this.style.cursor='
