@@ -6,6 +6,10 @@ function get_todos() {
     }
     return todos;
 }
+
+function runScript(e) {
+    if (e.keyCode == 13) { add() }; 
+}
  
 function add() {
     if (document.getElementById('task').value.length === 0) {
@@ -136,8 +140,6 @@ function show() {
         buttons[i].addEventListener('click', modal);
     };
 }
-    
-
 
 document.getElementById('add').addEventListener('click',add);
 
